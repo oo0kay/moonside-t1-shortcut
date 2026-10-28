@@ -7,13 +7,14 @@ on:
 
 jobs:
   build-ipa:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Generate Xcode Project & Info.plist
         run: |
+          brew install xcodegen
           cat << 'EOF' > Info.plist
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -60,7 +61,6 @@ jobs:
           name: MoonsideT1
           options:
             bundleIdPrefix: com.moonside
-            xcodeVersion: "15.0"
             deploymentTarget:
               iOS: "16.0"
           targets:
